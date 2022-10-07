@@ -6,7 +6,7 @@ import { WatchListContext } from '../context/watchListContext'
 
 export const Stocklist = () => {
 	const [stock, setStock] = useState([])
-	const { watchList } = useContext(WatchListContext)
+	const { watchList, deleteStock } = useContext(WatchListContext)
 	const navigate = useNavigate()
 
 	const changeColor = (change) => {
@@ -64,6 +64,7 @@ export const Stocklist = () => {
 						<th scope="col">Low</th>
 						<th scope="col">Open</th>
 						<th scope="col">Pclose</th>
+						<th scope="col"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -87,6 +88,17 @@ export const Stocklist = () => {
 								<td>{stockData.data.l}</td>
 								<td>{stockData.data.o}</td>
 								<td>{stockData.data.pc}</td>
+								<td>
+									<button
+										onClick={(e) => {
+											e.stopPropagation()
+											deleteStock(stockData.symbol)
+										}}
+										className="btn btn-danger btn-sm ml-3 d-inline-block delete-button"
+									>
+										Remove
+									</button>
+								</td>
 							</tr>
 						)
 					})}
